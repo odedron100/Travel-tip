@@ -1,4 +1,4 @@
-import { mapService } from './services/map-service.js'
+import { mapService } from './services/map-service.js';
 
 var gMap;
 console.log('Main!');
@@ -52,6 +52,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
+                console.log('mapsMouseEvent', mapsMouseEvent);
+                const pos = mapsMouseEvent.latLng.toJSON();
+                // managingLocations(pos);
                 infoWindow.open(gMap);
                 console.log('infoWindow.content', infoWindow.content);
             });

@@ -1,3 +1,4 @@
+import { utilService } from './util-service.js';
 export const mapService = {
     getLocs
 }
@@ -11,9 +12,14 @@ function getLocs() {
     });
 }
 
-function managingLocations() {
-    var CreateNewLocation = {
-        id: makeId(),
-
-    }
-}
+// function managingLocations() {
+//     var CreateNewLocation = {
+//         id: utilService.makeId(),
+//         name: ,
+//         lat: ,
+//         lng,
+//         weather: ,
+//         createdAt:,
+//         updatedAt:,
+//     }
+// }
