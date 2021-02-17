@@ -19,13 +19,13 @@ window.onload = () => {
         })
         .catch(() => console.log('INIT MAP ERROR'));
 
-    getPosition()
-        .then(pos => {
-            console.log('User position is:', pos.coords);
-        })
-        .catch(err => {
-            console.log('err!!!', err);
-        })
+    // getPosition()
+    //     .then(pos => {
+    //         console.log('User position is:', pos.coords);
+    //     })
+    //     .catch(err => {
+    //         console.log('err!!!', err);
+    //     })
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -94,4 +94,18 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+
+window.onMyLocation = () => {
+    const elMyLocation = document.querySelector('.my-location')
+    console.log('elMyLocation', elMyLocation);
+    getPosition()
+        .then(pos => {
+            initMap(pos.coords.latitude, pos.coords.longitude)
+        })
+        .catch(err => {
+            console.log('err!!!', err);
+        })
+
 }
