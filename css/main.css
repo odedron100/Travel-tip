@@ -1,0 +1,112 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(227, 164, 46);
+}
+
+.btn {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+    border: none;
+}
+
+.main-container{
+    width: 90%;
+    margin: 0 auto;
+    height: 100vh;
+    display: grid;
+    grid-auto-rows: 100px 100px 1fr;
+}
+
+.main-header{
+   display: grid;
+   grid-template-columns: 40% 60%;
+}
+
+.main-header .head {
+    grid-column: 1/1;
+    justify-self: flex-start;
+    align-self: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main-header .location-services{
+    grid-column: 2/2;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.location-services input{
+    height: 2.5rem;
+    background-color: rgb(172, 172, 172);
+    border: none;
+    color: white;
+    flex:2;
+    font-size: 1.2rem;
+}
+
+.location-services input:focus{outline: none;}
+
+.location-services .go-location{
+    height: 2.5rem;
+    margin-left: 0;
+    flex: 0.5;
+}
+
+.location-services .my-location{
+    height: 2.5rem;
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.location-details{
+    grid-row: 2/2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.location-details .location-desc{
+    justify-self: center;
+    align-self: center;
+}
+
+.location-desc h2{
+    margin: 0;
+    display: inline-block;
+}
+
+.location-desc .copy-location{
+    height: 50%;
+    justify-self: center;
+    align-self: center;
+    width: 30%;
+}
+
+.main-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.main-content .location-wheather-details{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.location-wheather-details .wheather-details {
+    background-color: white;
+}
+
+.location-wheather-details .location-table{
+    background-color: steelblue;
+    color: white;
+}
