@@ -37,9 +37,9 @@ function createLocations(pos, locId) {
     return Promise.resolve(window.gLocations);
 }
 
-function getLocsBySearch() {
+function getLocsBySearch(place) {
     const API_KEY = 'AIzaSyAchi1_MEb0QoTUt3dFyTQ7wJ6Rn7Db574';
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Tel+Aviv,+CA&key=${API_KEY}`)
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${place},+CA&key=${API_KEY}`)
         .then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => data.results[0].geometry.location)
 }
