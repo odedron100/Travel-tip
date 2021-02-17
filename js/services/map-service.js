@@ -11,4 +11,9 @@ function getLocs() {
     });
 }
 
+function managingLocations() {
+    var CreateNewLocation = {
+        id: makeId(),
 
+    }
+}
