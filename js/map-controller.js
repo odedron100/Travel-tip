@@ -53,8 +53,10 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
+                console.log('infoWindow.content', infoWindow.content);
             });
         })
+
 }
 
 function addMarker(loc) {
@@ -93,6 +95,3 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
-
-
-
