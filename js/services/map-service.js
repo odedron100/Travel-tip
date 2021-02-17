@@ -35,7 +35,7 @@ function createLocations(pos, locId) {
 
 function getLocsBySearch() {
     const API_KEY = 'AIzaSyAchi1_MEb0QoTUt3dFyTQ7wJ6Rn7Db574';
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${API_KEY}`)
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=Tel+Aviv,+CA&key=${API_KEY}`)
         .then(response => response.json())
         .then(data => console.log(data));
 }
