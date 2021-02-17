@@ -1,7 +1,8 @@
 import { utilService } from './util-service.js';
 export const mapService = {
     getLocs,
-    createLocations
+    createLocations,
+    getLocsBySearch
 }
 var locs = [{ lat: 11.22, lng: 22.11 }]
 window.gLocations = [];
@@ -24,7 +25,7 @@ function createLocations(pos, locId) {
         createdAt: Date.now(),
         // updatedAt:,
     }
-    if (!createNewLocation.locId) {
+    if (!createNewLocation.id) {
         alert('This is not a place')
         return Promise.reject('not a place');
     }
@@ -32,3 +33,9 @@ function createLocations(pos, locId) {
     return Promise.resolve(window.gLocations);
 }
 
+function getLocsBySearch() {
+    const API_KEY = 'AIzaSyAchi1_MEb0QoTUt3dFyTQ7wJ6Rn7Db574';
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => console.log(data));
+}

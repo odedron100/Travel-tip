@@ -8,9 +8,12 @@ mapService.getLocs()
 
 window.onload = () => {
 
-    document.querySelector('.btn').addEventListener('click', (ev) => {
-        console.log('Aha!', ev.target);
-        panTo(35.6895, 139.6917);
+    document.querySelector('.go-location').addEventListener('click', (ev) => {
+        const value = document.querySelector('input[name=location-search]').value;
+        console.log(value, ev.target);
+        // mapService.getLocsBySearch()
+        // panTo(35.6895, 139.6917);
+        document.querySelector('input[name=location-search]').value = '';
     })
 
     initMap()
@@ -18,14 +21,6 @@ window.onload = () => {
             addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
         .catch(() => console.log('INIT MAP ERROR'));
-
-    // getPosition()
-    //     .then(pos => {
-    //         console.log('User position is:', pos.coords);
-    //     })
-    //     .catch(err => {
-    //         console.log('err!!!', err);
-    //     })
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -55,7 +50,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 console.log('mapsMouseEvent', mapsMouseEvent);
                 const pos = mapsMouseEvent.latLng.toJSON();
                 const locId = mapsMouseEvent.placeId;
-                // console.log('locId', locId);
                 infoWindow.open(gMap);
                 mapService.createLocations(pos, locId)
                     .then(locations => {
