@@ -1,4 +1,5 @@
 import { storageService } from './storage-service.js';
+import { utilService } from './util-service.js';
 
 export const mapService = {
     getLocs,
@@ -34,8 +35,7 @@ function createLocations(pos, locId) {
         return Promise.resolve(locations)
     }
     if (!locId) {
-        alert('This is not a place')
-        return Promise.reject('not a place');
+        locId = utilService.makeId();
     }
     var name = prompt('Enter name of your place')
     window.gLocations[locId] = {
@@ -51,10 +51,5 @@ function getLocsBySearch(place) {
     const API_KEY = 'AIzaSyAchi1_MEb0QoTUt3dFyTQ7wJ6Rn7Db574';
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${place},+CA&key=${API_KEY}`)
         .then(response => response.json())
-<<<<<<< HEAD
-        .then(data => console.log(data));
-}
-=======
         .then(data => data.results[0].geometry.location)
 }
->>>>>>> origin/main

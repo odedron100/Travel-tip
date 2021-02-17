@@ -10,7 +10,6 @@ window.onload = () => {
 
     document.querySelector('.go-location').addEventListener('click', (ev) => {
         const value = document.querySelector('input[name=location-search]').value;
-        console.log(value, ev.target);
         mapService.getLocsBySearch(value)
             .then(panTo)
         document.querySelector('input[name=location-search]').value = '';
