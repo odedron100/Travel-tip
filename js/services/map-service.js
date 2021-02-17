@@ -3,7 +3,9 @@ import { storageService } from './storage-service.js';
 export const mapService = {
     getLocs,
     createLocations,
-    getLocsBySearch
+    getLocsBySearch,
+    getLocations,
+    updateLocations
 }
 var locs = [{ lat: 11.22, lng: 22.11 }]
 window.gLocations = {};
@@ -15,6 +17,15 @@ function getLocs() {
             resolve(locs);
         }, 2000)
     });
+}
+
+function getLocations() {
+    return window.gLocations;
+}
+
+function updateLocations(locations) {
+    window.gLocations = locations;
+    storageService.saveToStorage(window.KEY, window.gLocations);
 }
 
 function createLocations(pos, locId) {
@@ -29,8 +40,7 @@ function createLocations(pos, locId) {
     var name = prompt('Enter name of your place')
     window.gLocations[locId] = {
         name: name,
-        lat: pos.lat,
-        lng: pos.lng,
+        pos: { lat: pos.lat, lng: pos.lng },
         createdAt: Date.now(),
     };
     storageService.saveToStorage(window.KEY, window.gLocations)

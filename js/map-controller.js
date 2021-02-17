@@ -63,14 +63,29 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 function renderNewLocation(locations) {
     console.log('locations', locations);
     document.querySelector('.location-table').innerHTML = Object.keys(locations).map((location) => {
+        console.log('locations[location].pos', locations[location].pos);
         return `
             <div class="location-chose">
                 <div class="id">name : ${locations[location].name}</div>
-                <button class="delete-button">delete</button>
-                <button class="go-button">go</button>
+                <button class="remove-button" onclick="onRemoveLoc('${location}')">remove</button>
+                <button class="go-button" onclick="onGoLoc('${location}')">go</button>
             </div>
             `
     }).join('')
+}
+
+window.onRemoveLoc = (location) => {
+    const locationsArray = mapService.getLocations();
+    delete locationsArray[location];
+    renderNewLocation(locationsArray);
+    mapService.updateLocations(locationsArray);
+}
+
+window.onGoLoc = (location) => {
+    const locationsArray = mapService.getLocations();
+    var lng = locationsArray[location].pos.lng;
+    var lat = locationsArray[location].pos.lat;
+    panTo(lat, lng);
 }
 
 function addMarker(loc) {
@@ -114,12 +129,12 @@ function _connectGoogleApi() {
 window.onMyLocation = () => {
     const elMyLocation = document.querySelector('.my-location')
     console.log('elMyLocation', elMyLocation);
-    getPosition()
-        .then(pos => {
-            initMap(pos.coords.latitude, pos.coords.longitude)
-        })
-        .catch(err => {
-            console.log('err!!!', err);
-        })
+    // getPosition()
+    //     .then(pos => {
+    //         initMap(pos.coords.latitude, pos.coords.longitude)
+    //     })
+    //     .catch(err => {
+    //         console.log('err!!!', err);
+    //     })
 
 }
