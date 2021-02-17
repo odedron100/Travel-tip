@@ -1,11 +1,13 @@
-import { utilService } from './util-service.js';
+import { storageService } from './storage-service.js';
+
 export const mapService = {
     getLocs,
     createLocations,
     getLocsBySearch
 }
 var locs = [{ lat: 11.22, lng: 22.11 }]
-window.gLocations = [];
+window.gLocations = {};
+window.KEY = 'location';
 
 function getLocs() {
     return new Promise((resolve, reject) => {
@@ -16,20 +18,22 @@ function getLocs() {
 }
 
 function createLocations(pos, locId) {
-    var createNewLocation = {
-        id: locId,
-        // name: ,
-        lat: pos.lat,
-        lng: pos.lng,
-        // weather: ,
-        createdAt: Date.now(),
-        // updatedAt:,
+    let locations = storageService.loadFromStorage(window.KEY);
+    if (locations && locations[locId]) {
+        return Promise.resolve(locations)
     }
-    if (!createNewLocation.id) {
+    if (!locId) {
         alert('This is not a place')
         return Promise.reject('not a place');
     }
-    window.gLocations.push(createNewLocation);
+    var name = prompt('Enter name of your place')
+    window.gLocations[locId] = {
+        name: name,
+        lat: pos.lat,
+        lng: pos.lng,
+        createdAt: Date.now(),
+    };
+    storageService.saveToStorage(window.KEY, window.gLocations)
     return Promise.resolve(window.gLocations);
 }
 
