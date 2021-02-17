@@ -1,4 +1,4 @@
-import { mapService } from './services/map-service.js'
+import { mapService } from './services/map-service.js';
 
 var gMap;
 console.log('Main!');
@@ -52,11 +52,32 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
+                console.log('mapsMouseEvent', mapsMouseEvent);
+                const pos = mapsMouseEvent.latLng.toJSON();
+                const locId = mapsMouseEvent.placeId;
+                // console.log('locId', locId);
                 infoWindow.open(gMap);
-                console.log('infoWindow.content', infoWindow.content);
+                mapService.createLocations(pos, locId)
+                    .then(locations => {
+                        console.log('locations', locations);
+                        renderNewLocation(locations);
+                    })
             });
         })
 
+}
+
+function renderNewLocation(locations) {
+    document.querySelector('.location-table').innerHTML = locations.map(location => {
+        console.log('location', location);
+        return `
+            <div class="location-chose">
+                <div class="id">${location.id}</div>
+                <div class="time-created">${location.createdAt}</div>
+                <div class="position">${location.lat},${location.lng}</div>
+            </div>
+    `
+    }).join('')
 }
 
 function addMarker(loc) {
