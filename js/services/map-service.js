@@ -35,3 +35,4 @@ function createLocations(pos, locId) {
     storageService.saveToStorage(window.KEY, window.gLocations)
     return Promise.resolve(window.gLocations);
 }
+
